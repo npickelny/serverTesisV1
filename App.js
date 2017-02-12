@@ -6,7 +6,8 @@ let bodyParser = require('body-parser');
 
 
 let Router = require('./routes/Router')
-
+let Database = require('./utils/Database')
+let ModelInitializer = require('./models')
 
 let app = express();
 
@@ -20,9 +21,9 @@ Router.initializeApp(app)
 
 // Add promises that need to be completed before starting the server here
 app.initialization = [
-    // Database.authenticate(),
+    Database.authenticate(),
     // Cache.init(),
-    // ModelInitializer.init()
+    ModelInitializer.init(),
     console.log("App.initialization ...")
 ]
 
