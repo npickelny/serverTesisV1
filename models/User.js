@@ -1,11 +1,12 @@
-'use strict'
-let Database = require('../utils/Database')
-let Sequelize = require('Sequelize')
+'use strict';
+
+let Database = require('../utils/Database');
+let Sequelize = require('sequelize');
 
 let User = Database.define('user', {
-  title: Sequelize.STRING,
-  description: Sequelize.TEXT
+  email: Sequelize.STRING,
+  name: Sequelize.STRING
 })
 
 
-module.exports = User
+module.exports = User;

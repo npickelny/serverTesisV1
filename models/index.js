@@ -4,6 +4,7 @@ let _ = require('lodash')
 let Promise = require('bluebird')
 let Database = require('../utils/Database')
 let ImportUtils = require('../utils/ImportUtils')
+let User = require('./User')
 
 Database.models = {}
 
@@ -21,7 +22,12 @@ class ModelInitializer {
       console.log('Syncing database')
         return Database.sync()
       })
-      // .then(DatabaseSeeder.seed)
+      .then(() =>{
+        return User.create({
+          email: "nico",
+          name: "nicoPickelny"
+      })
+    })
   }
 }
 module.exports = ModelInitializer

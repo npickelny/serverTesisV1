@@ -5,13 +5,13 @@ let UserController = require('../controllers/UserController');
 class UserRoutes {
   constructor () {}
   static init(app) {
-    let baseRoute = '/api/user'
+    let baseRoute = '/api/user';
     app.get(baseRoute+"/getUser", UserController.hola);
     app.get(baseRoute+"/chau", UserController.chau);
 
-    app.post(baseRoute+'/login' UserController.login);
+    app.post(baseRoute+'/login', UserController.login);
   }
 }
 
 
-module.exports = UserRoutes
+module.exports = UserRoutes;
