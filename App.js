@@ -21,9 +21,9 @@ Router.initializeApp(app)
 
 // Add promises that need to be completed before starting the server here
 app.initialization = [
-    //Database.authenticate(),
+    Database.authenticate(),
     // Cache.init(),
-    //ModelInitializer.init(),
+    ModelInitializer.init(),
     console.log("App.initialization ...")
 ]
 

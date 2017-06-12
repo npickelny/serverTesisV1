@@ -1,8 +1,8 @@
 'use strict'
 
-let fs = require('fs')
-let _ = require('lodash')
-let ImportUtils = require('../utils/ImportUtils')
+let fs = require('fs');
+let _ = require('lodash');
+let ImportUtils = require('../utils/ImportUtils');
 
 class Router {
     initializeApp(app) {
@@ -11,7 +11,7 @@ class Router {
                 _.each(routes, route => {
                     route.init(app)
                 })
-            })
+            });
 
         app.get('/doc', function (req, res) {
             //Expose api doc
@@ -20,4 +20,4 @@ class Router {
     }
 }
 
-module.exports = new Router()
+module.exports = new Router();

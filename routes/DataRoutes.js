@@ -8,6 +8,8 @@ class DataRoutes {
         let baseRoute = '/api/data';
 
         app.post(baseRoute + '/sendData', DataController.guardarDatos);
+        app.post(baseRoute + '/sendData', DataController.trainNeuron);
+        
 
     }
 }

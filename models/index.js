@@ -22,12 +22,14 @@ class ModelInitializer {
       console.log('Syncing database')
         return Database.sync()
       })
-      .then(() =>{
-        return User.create({
-          email: "nico",
-          name: "nicoPickelny"
-      })
-    })
+    //   .then(() =>{
+    //     return User.create({
+    //       name: "gabi",
+    //       lastName: "desimone",
+    //       email: "g@blbla.com",
+    //       neurona: null
+    //   })
+    // })
   }
 }
 module.exports = ModelInitializer

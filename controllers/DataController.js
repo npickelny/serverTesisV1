@@ -1,6 +1,7 @@
 'use strict';
 
-let DataService = require('./../service/DataService');
+let User = require('../models/User');
+let Neurona = require('../neurona/Neurona');
 
 class DataController{
     constructor(){ }
@@ -10,8 +11,7 @@ class DataController{
         let data = req.body.data;
 
         console.log("GUARDAR DATOS FUNCTION");
-        DataService.dataProcess(user,data);
-
+        
         let keyAirArrayAux = req.body.keyAirArray;
         let keyPressArrayAux = req.body.keyPressArray;
 
@@ -21,12 +21,56 @@ class DataController{
         console.log("************************************");
         console.log(keyAirArray);
 
+        
+        
+        let response = {
+            resultCode : 10
+        }
+        return res.send(response);
+    }
+    
+    static processingNeurona(req, res){
+
+        //buscar neurona
+
 
         let response = {
             resultCode : 10
         }
         return res.send(response);
     }
+
+    static trainNeuron(req, res){
+        let email = req.body.email;
+        let data = req.body.data;
+        
+        User.findById(email)
+          .then(usr=>{
+             if(!usr){
+                 return res.send("NO EXISTE WACHO")
+             }
+              //FALTA DESPARSEAR
+              let neurona = usr.neurona;
+              let neuronaPosta = JSON.parse(neurona);
+
+              Neurona.trainNeurona(usr, neurona, datos)
+                  .then(msg =>{
+
+                  })
+                  .catch()
+              
+          });
+        
+        let keyAirArrayAux = req.body.keyAirArray;
+        let keyAirArray = JSON.parse(keyAirArrayAux);
+
+        let keyPressArrayAux = req.body.keyPressArray;
+        let keyPressArray = JSON.parse(keyPressArrayAux);
+        
+        
+
+    }
+    
 }
 
 module.exports = DataController;
