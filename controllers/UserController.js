@@ -11,18 +11,20 @@ class UserController {
   }
 
   static chau(req, res){
+    console.log("JSDAJDASJDJASJ")
     return res.send("chau")
   }
 
   static login(req, res){
     let email = req.body.email
     console.log(email)
+    console.log("JSDAJDASJDJASJ")
     UserService.findUser(email)
     .then(user =>{
       if(!user){
           return res.send("No User")
       }
-      return res.send("ok")
+      return res.send(user)
     })
   }
 }
