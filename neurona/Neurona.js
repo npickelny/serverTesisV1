@@ -13,15 +13,28 @@ class Neurona{
 
     static createNeurona(){
         let Architect = synaptic.Architect;
-        let myNeurona = new Architect.Perceptron(4, 2, 1);
+
+        var myNetwork = new Architect.Perceptron(37, 2, 1);
         return myNeurona;
     }
     
     static trainNeurona(user, neurona, data){
 
+        let Neuron = synaptic.Neuron;
+        let Layer = synaptic.Layer;
+        let Network = synaptic.Network;
         let Trainer = synaptic.Trainer;
+        let Architect = synaptic.Architect;
+
+        // var myNetwork = new Architect.Perceptron(37, 2, 1);
+        //  var trainer = new Trainer(myNetwork);
+
+
+
+
         let trainer = new Trainer(neurona);
-     
+
+        Neurona.procesarDatos(data)
         //FUNCION OBTENER DATOS FALSOS
 
         let trainerData;
@@ -52,6 +65,36 @@ class Neurona{
         //console.log(neurona.activate([0.47, 0.93, 0.70, 0.63]));
     }
 
+    static procesarDatos(data)
+    {
+        console.log(data[0].counter+"  ----- " +data[0].total)
+        let datos = [];
+        let contador =0;
+        while(contador<=25)
+        {
+            console.log(contador +" eh nico gato este es un log")
+            if(data[contador].total==0)
+            {
+
+                datos.push(parseInt(0))
+                contador++;
+                console.log(contador +" eh nico gato este es un log del if verdadres")
+            }
+            else
+            {
+
+                contador++;
+                datos.push(data[contador].total/data[contador].counter)
+                console.log(contador +" eh nico gato este es un log del else")
+            }
+        }
+        if(data[33].total!=0)
+        {
+            console.log("sarasa cagona ")
+            datos.push(data[33].total/data[33].counter)
+        }
+        console.log(datos)
+    }
     static valvaslv() {
 
 
@@ -61,7 +104,7 @@ class Neurona{
         let Trainer = synaptic.Trainer;
         let Architect = synaptic.Architect;
 
-        var myNetwork = new Architect.Perceptron(4, 2, 1);
+        var myNetwork = new Architect.Perceptron(37, 2, 1);
         var trainer = new Trainer(myNetwork);
 
         var trainingSet = [

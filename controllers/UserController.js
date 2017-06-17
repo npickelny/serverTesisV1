@@ -5,19 +5,15 @@ let UserService = require('../service/UserService');
 class UserController {
   constructor() {}
 
-  static hola(req, res) {
+  static mail(req, res) {
     return res.send("hola")
   }
 
-  static chau(req, res){
-    console.log("JSDAJDASJDJASJ")
-    return res.send("chau")
-  }
 
   static login(req, res){
     let email = req.body.email
     console.log(email)
-    console.log("JSDAJDASJDJASJ")
+
     UserService.findUser(email)
     .then(user =>{
       if(!user){

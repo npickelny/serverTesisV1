@@ -21,7 +21,7 @@ class DataController{
         console.log("************************************");
         console.log(keyAirArray);
 
-        
+
         
         let response = {
             resultCode : 10
@@ -43,17 +43,32 @@ class DataController{
     static trainNeuron(req, res){
         let email = req.body.email;
         let data = req.body.data;
-        
+
+        let user = req.body.user;
+
+        console.log("GUARDAR DATOS FUNCTION");
+
+        let keyAirArrayAux = req.body.keyAirArray;
+        let keyPressArrayAux = req.body.keyPressArray;
+        console.log(req.body)
+        //let keyAirArray = JSON.parse(keyAirArrayAux);
+        let keyPressArray = (keyPressArrayAux);
+        console.log(keyPressArray);
+        console.log("************************************");
+       // console.log(keyAirArray);
+
+
         User.findById(email)
           .then(usr=>{
              if(!usr){
                  return res.send("NO EXISTE WACHO")
              }
+             usr.neuron
               //FALTA DESPARSEAR
               let neurona = usr.neurona;
               let neuronaPosta = JSON.parse(neurona);
 
-              Neurona.trainNeurona(usr, neurona, datos)
+              Neurona.trainNeurona(usr, neurona, keyPressArray)
                   .then(msg =>{
 
                   })
@@ -61,12 +76,7 @@ class DataController{
               
           });
         
-        let keyAirArrayAux = req.body.keyAirArray;
-        let keyAirArray = JSON.parse(keyAirArrayAux);
 
-        let keyPressArrayAux = req.body.keyPressArray;
-        let keyPressArray = JSON.parse(keyPressArrayAux);
-        
         
 
     }
