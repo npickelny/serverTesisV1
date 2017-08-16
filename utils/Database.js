@@ -7,9 +7,11 @@ let Config = require('../config/Config')
 let Database = new Sequelize('tesis', 'tesisUsr','tesisUsr', {
   // host: 'localhost',
   // port: '50156',
-  host: '192.168.0.16',
-  port: '1433',
-  dialect: 'mssql',
+  //host: '192.168.0.16',
+  //port: '1433',
+    host: '127.0.0.1',
+    port: '3306',
+  dialect: 'mysql',
   logging: Config.DB_LOGGING == 'true'
 });
 

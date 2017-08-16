@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-Router.initializeApp(app)
+
 
 // Add promises that need to be completed before starting the server here
 app.initialization = [
@@ -27,5 +27,7 @@ app.initialization = [
     console.log("App.initialization ...")
 ]
 
+
+Router.initializeApp(app)
 
 module.exports = app;

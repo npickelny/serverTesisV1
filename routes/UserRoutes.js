@@ -9,6 +9,7 @@ class UserRoutes {
 
     app.post(baseRoute+'/signup', UserController.signup);
     app.post(baseRoute+'/login', UserController.login);
+
   }
 }
 

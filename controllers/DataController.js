@@ -42,11 +42,12 @@ class DataController{
 
     static trainNeuron(req, res){
         let email = req.body.email;
+        console.log("gola "+req.body)
         let data = req.body.data;
 
         let user = req.body.user;
 
-        console.log("GUARDAR DATOS FUNCTION");
+        console.log("GUARDAR df DATOS FUNCTION");
 
         let keyAirArrayAux = req.body.keyAirArray;
         let keyPressArrayAux = req.body.keyPressArray;
@@ -60,8 +61,9 @@ class DataController{
 
         User.findById(email)
           .then(usr=>{
+
              if(!usr){
-                 return res.send("NO EXISTE WACHO")
+                 return res.send(email+" k NO EXISTE WACHO")
              }
              usr.neuron
               //FALTA DESPARSEAR

@@ -25,12 +25,15 @@ class UserController {
 
   static signup(req, res) {
 
+
+    console.log(req.body.lastName);
     // return res.send("dsadsa");
     let auxUser = {
       email: req.body.email,
       name: req.body.name,
       lastName: req.body.lastName
     }
+    console.log("hola"+req.body.lastName)
     
     UserService.findUser(auxUser.email)
       .then(user =>{

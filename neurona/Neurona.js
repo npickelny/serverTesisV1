@@ -12,10 +12,11 @@ class Neurona{
     }
 
     static createNeurona(){
+        console.log("llegeu a lo de la neurona")
         let Architect = synaptic.Architect;
 
         var myNetwork = new Architect.Perceptron(37, 2, 1);
-        return myNeurona;
+        return myNetwork;
     }
     
     static trainNeurona(user, neurona, data){
