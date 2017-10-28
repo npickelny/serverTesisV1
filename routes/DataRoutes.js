@@ -9,7 +9,7 @@ class DataRoutes {
 
         app.post(baseRoute + '/sendData', DataController.guardarDatos);
         app.post(baseRoute + '/trainData', DataController.trainNeuron);
-        
+
 
     }
 }

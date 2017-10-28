@@ -2,6 +2,7 @@
 
 let User = require('../models/User');
 let Neurona = require('../neurona/Neurona');
+let letter = require('../models/letter');
 
 class DataController{
     constructor(){ }
@@ -42,21 +43,10 @@ class DataController{
 
     static trainNeuron(req, res){
         let email = req.body.email;
-        console.log("gola "+req.body)
-        let data = req.body.data;
 
-        let user = req.body.user;
+        var data = (req.body)  //acaa.items
 
-        console.log("GUARDAR df DATOS FUNCTION");
 
-        let keyAirArrayAux = req.body.keyAirArray;
-        let keyPressArrayAux = req.body.keyPressArray;
-        console.log(req.body)
-        //let keyAirArray = JSON.parse(keyAirArrayAux);
-        let keyPressArray = (keyPressArrayAux);
-        console.log(keyPressArray);
-        console.log("************************************");
-       // console.log(keyAirArray);
 
 
         User.findById(email)
@@ -70,7 +60,7 @@ class DataController{
               let neurona = usr.neurona;
               let neuronaPosta = JSON.parse(neurona);
 
-              Neurona.trainNeurona(usr, neurona, keyPressArray)
+              Neurona.trainNeurona(usr, neurona, data)
                   .then(msg =>{
 
                   })
@@ -82,6 +72,10 @@ class DataController{
         
 
     }
+
+
+
+
     
 }
 

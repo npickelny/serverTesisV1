@@ -2,6 +2,7 @@
  * Created by nicolaspickelny on 6/11/17.
  */
 var synaptic = require('synaptic'); // this line is not needed in the browser
+var letter= require('../models/letter')
 
 
 class Neurona{
@@ -12,8 +13,7 @@ class Neurona{
     }
 
     static createNeurona(){
-        console.log("llegeu a lo de la neurona")
-        let Architect = synaptic.Architect;
+    let Architect = synaptic.Architect;
 
         var myNetwork = new Architect.Perceptron(37, 2, 1);
         return myNetwork;
@@ -35,7 +35,8 @@ class Neurona{
 
         let trainer = new Trainer(neurona);
 
-        Neurona.procesarDatos(data)
+
+        let array = Neurona.procesarDatos(data);
         //FUNCION OBTENER DATOS FALSOS
 
         let trainerData;
@@ -66,36 +67,39 @@ class Neurona{
         //console.log(neurona.activate([0.47, 0.93, 0.70, 0.63]));
     }
 
-    static procesarDatos(data)
-    {
-        console.log(data[0].counter+"  ----- " +data[0].total)
-        let datos = [];
-        let contador =0;
-        while(contador<=25)
-        {
-            console.log(contador +" eh nico gato este es un log")
-            if(data[contador].total==0)
-            {
+    procesarDatos(data) {
+        var objetoconLetras = [];
+        var i;
+        for (var i = 0; i < 10; i++) {
+            let letras = letter;
+            for (var j = 0; j < 27; j++) {
+                if (j == 26) {
+                    if (data.items[i][j].timer != 0) {
+                        letras[letrita] = data.items[i][j].timer / data.items[i][j].cant;
+                        break
+                    }
+                    else {
+                        letras[letrita] = 0;
+                        break
+                    }
+                }
+                var letrita = String.fromCharCode(65 + j);
+                if (data.items[i][j].timer != 0)
+                    letras[letrita] = data.items[i][j].timer / data.items[i][j].cant;
 
-                datos.push(parseInt(0))
-                contador++;
-                console.log(contador +" eh nico gato este es un log del if verdadres")
+                else {
+                    letras[letrita] = 0;
+                }
             }
-            else
-            {
+            letras.email = data.email;
+            letras.save;
+            objetoconLetras.add(letras)
+        }
+        //noinspection JSAnnotator,JSAnnotator
+        return objetoconLetras;
 
-                contador++;
-                datos.push(data[contador].total/data[contador].counter)
-                console.log(contador +" eh nico gato este es un log del else")
-            }
-        }
-        if(data[33].total!=0)
-        {
-            console.log("sarasa cagona ")
-            datos.push(data[33].total/data[33].counter)
-        }
-        console.log(datos)
     }
+
     static valvaslv() {
 
 
