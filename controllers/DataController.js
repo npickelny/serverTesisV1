@@ -1,7 +1,7 @@
 'use strict';
 
 let User = require('../models/User');
-let Neurona = require('../neurona/Neurona');
+let CustomNeurona = require('../neurona/Neurona');
 let letter = require('../models/letter');
 
 class DataController{
@@ -30,53 +30,23 @@ class DataController{
         return res.send(response);
     }
     
-    static processingNeurona(req, res){
 
-        //buscar neurona
-
-
-        let response = {
-            resultCode : 10
-        }
-        return res.send(response);
-    }
 
     static trainNeuron(req, res){
         let email = req.body.email;
-
-        var data = (req.body)  //acaa.items
-
-
-
+        var data = (req.body); //acaa.items
 
         User.findById(email)
-          .then(usr=>{
-
-             if(!usr){
-                 return res.send(email+" k NO EXISTE WACHO")
-             }
-             usr.neuron
-              //FALTA DESPARSEAR
-              let neurona = usr.neurona;
-              let neuronaPosta = JSON.parse(neurona);
-
-              Neurona.trainNeurona(usr, neurona, data)
-                  .then(msg =>{
-
-                  })
-                  .catch()
-              
+            .then(usr=>{
+                if(!usr){
+                    return res.send(email+" k NO EXISTE WACHO")
+                }
+                //FALTA DESPARSEAR
+                // let neurona = usr.neurona;
+                let neuronaPosta = JSON.parse(usr.neurona);
+                CustomNeurona.trainNeurona(usr, neuronaPosta, data)
           });
-        
-
-        
-
     }
-
-
-
-
-    
 }
 
 module.exports = DataController;
