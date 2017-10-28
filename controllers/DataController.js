@@ -1,5 +1,6 @@
 'use strict';
 
+var synaptic = require('synaptic');
 let User = require('../models/User');
 let CustomNeurona = require('../neurona/Neurona');
 let letter = require('../models/letter');
@@ -43,7 +44,8 @@ class DataController{
                 }
                 //FALTA DESPARSEAR
                 // let neurona = usr.neurona;
-                let neuronaPosta = JSON.parse(usr.neurona);
+
+                var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(usr.neurona));
                 CustomNeurona.trainNeurona(usr, neuronaPosta, data)
           });
     }

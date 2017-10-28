@@ -13,11 +13,11 @@ class Neurona {
 
     static createNeurona() {
         let Architect = synaptic.Architect;
-        var myNetwork = new Architect.Perceptron(37, 10, 1);
+        var myNetwork = new Architect.Perceptron(27, 10, 1);
         return myNetwork;
     }
 
-    static trainNeurona(user, neurona, data) {
+    static trainNeurona(user, myNetwork, data) {
 
         let Neuron = synaptic.Neuron;
         let Layer = synaptic.Layer;
@@ -25,9 +25,9 @@ class Neurona {
         let Trainer = synaptic.Trainer;
         let Architect = synaptic.Architect;
 
-        var myNetwork = new Architect.Perceptron(27, 10, 1);
+        //var myNetwork = new Architect.Perceptron(27, 10, 1);
 
-
+        console.log(myNetwork)
         var trainer = new Trainer(myNetwork);
 
         Promise.try(function () {
