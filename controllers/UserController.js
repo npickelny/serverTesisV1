@@ -38,13 +38,13 @@ class UserController {
     UserService.findUser(auxUser.email)
       .then(user =>{
         if(user){
-          return res.send("User exists");
+          return res.send("User exist");
         }
-        return UserService.createUser(auxUser);
-      })
-      .then(()=>{
+        else{
+        UserService.createUser(auxUser);
+
         return res.send("User Created");
-      })
+      }})
       .catch(err =>{
         console.log(err);
         return err;
