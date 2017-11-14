@@ -28,7 +28,9 @@ class UserService{
          .catch(err =>{
             console.log(err);
          })
-    }    
+    }
+
+
 }
 
 module.exports = UserService;

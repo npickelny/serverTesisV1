@@ -1,6 +1,8 @@
 'use strict'
 
 let UserService = require('../service/UserService');
+let CustomNeurona = require('../neurona/Neurona');
+var synaptic = require('synaptic');
 
 class UserController {
   constructor() {}
@@ -19,6 +21,9 @@ class UserController {
       if(!user){
           return res.send("No User")
       }
+      var data = (req.body);
+      var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(user.neurona));
+      var valor=CustomNeurona.validatorUser(req.body,user,neuronaPosta)
       return res.send(user)
     })
   }
@@ -51,6 +56,8 @@ class UserController {
       })
     
   }
+
+
 }
 
 module.exports = UserController;

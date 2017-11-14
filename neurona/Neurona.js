@@ -35,35 +35,37 @@ class Neurona {
         })
             .then(normalizedData => {
                 console.log(normalizedData)
-                 trainer.train(normalizedData);
-              var output=  myNetwork.activate([0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215,
-                     0.0215]);
-                 console.log(output)
+                trainer.train(normalizedData);
+
+                var output = myNetwork.activate([0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215,
+                    0.0215]);
+                console.log(output+"asdasdasdas")
+                return myNetwork;
             })
 
 
@@ -94,12 +96,37 @@ class Neurona {
 
     }
 
+    static normalizarDataLogin(data) {
+        var normalizada = []
+        console.log(data)
+        for (var j = 0; j < 27; j++) {
+            if (data.items[j].timer != 0) {
+                normalizada.push((data.items[j].timer / data.items[j].cant) / 1000)
+            }
+            else {
+                normalizada.push(0)
+            }
 
 
+        }
+        return normalizada
+    }
 
 
+    static validatorUser(data, user, myNetwork) {
+        Promise.try(function () {
+            return Neurona.normalizarDataLogin(data)
+        })
+            .then(normalizedData => {
+                console.log(normalizedData + "kmdlskfdsmdlksf")
+                var output = myNetwork.activate(normalizedData)
+                console.log(output + "pruebaaa")
+            })
 
+
+    }
 }
+
 
 module.exports = Neurona;
 

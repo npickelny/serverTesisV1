@@ -46,7 +46,8 @@ class DataController{
                 // let neurona = usr.neurona;
 
                 var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(usr.neurona));
-                CustomNeurona.trainNeurona(usr, neuronaPosta, data)
+               usr.neurona= JSON.stringify(CustomNeurona.trainNeurona(usr, neuronaPosta, data))
+                usr.save()
           });
     }
 }
