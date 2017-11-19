@@ -1,4 +1,5 @@
 'use strict';
+let UserService = require('../service/UserService');
 
 var synaptic = require('synaptic');
 let User = require('../models/User');
@@ -35,6 +36,7 @@ class DataController{
 
     static trainNeuron(req, res){
         let email = req.body.email;
+        console.log("informacion de nico"+req.body+"informacion de nico")
         var data = (req.body); //acaa.items
 
         User.findById(email)
@@ -49,6 +51,22 @@ class DataController{
                usr.neurona= JSON.stringify(CustomNeurona.trainNeurona(usr, neuronaPosta, data))
                 usr.save()
           });
+    }
+
+    static loginUsuarioValidado(req, res){
+        let email = req.body.email
+        console.log(email)
+
+        UserService.findUser(email)
+            .then(user =>{
+                if(!user){
+                    return res.send("No User")
+                }
+                var data = (req.body);
+                var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(user.neurona));
+                CustomNeurona.validatorUser(data,user,neuronaPosta)
+                return res.send(user)
+            })
     }
 }
 

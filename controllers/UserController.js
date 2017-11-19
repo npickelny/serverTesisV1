@@ -21,12 +21,11 @@ class UserController {
       if(!user){
           return res.send("No User")
       }
-      var data = (req.body);
-      var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(user.neurona));
-      var valor=CustomNeurona.validatorUser(req.body,user,neuronaPosta)
-      return res.send(user)
+        return res.send(user)
     })
   }
+
+
 
   static signup(req, res) {
 

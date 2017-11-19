@@ -13,7 +13,7 @@ class Neurona {
 
     static createNeurona() {
         let Architect = synaptic.Architect;
-        var myNetwork = new Architect.Perceptron(27, 10, 1);
+        var myNetwork = new Architect.Perceptron(27, 10,10, 1);
         return myNetwork;
     }
 
@@ -72,14 +72,17 @@ class Neurona {
         //console.log(neurona.activate([0.47, 0.93, 0.70, 0.63]));
     }
 
-    static normalizarData(data) {
+    static normalizarData(dataEnJson) {
 
         var trainingSet = [];
-        for (var i = 0; i < data.items.length; i++) {
+
+        var data=JSON.parse(dataEnJson.trainingData)
+        console.log(data)
+        for (var i = 0; i < data.length; i++) {
             var normalizada = []
-            for (var j = 0; j < 27; j++) {
-                if (data.items[i][j].timer != 0) {
-                    normalizada.push((data.items[i][j].timer / data.items[i][j].cant) / 1000)
+            for (var j = 0; j < data[i].length; j++){
+                if (data[i][j].timer != 0) {
+                    normalizada.push((data[i][j].timer / data[i][j].cant) / 1000)
                 }
                 else {
                     normalizada.push(0)
@@ -96,12 +99,13 @@ class Neurona {
 
     }
 
-    static normalizarDataLogin(data) {
+    static normalizarDataLogin(datosParaLogin) {
         var normalizada = []
-        console.log(data)
+        console.log(datosParaLogin)
+        var data=JSON.parse(datosParaLogin.keyPressArray)
         for (var j = 0; j < 27; j++) {
-            if (data.items[j].timer != 0) {
-                normalizada.push((data.items[j].timer / data.items[j].cant) / 1000)
+            if (data[j].timer != 0) {
+                normalizada.push((data[j].timer / data[j].cant) / 1000)
             }
             else {
                 normalizada.push(0)
