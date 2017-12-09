@@ -4,7 +4,7 @@ let UserService = require('../service/UserService');
 var synaptic = require('synaptic');
 let User = require('../models/User');
 let CustomNeurona = require('../neurona/Neurona');
-let letter = require('../models/letter');
+let letter = require('../models/Letter');
 
 class DataController{
     constructor(){ }
@@ -14,7 +14,7 @@ class DataController{
         let data = req.body.data;
 
         console.log("GUARDAR DATOS FUNCTION");
-        
+
         let keyAirArrayAux = req.body.keyAirArray;
         let keyPressArrayAux = req.body.keyPressArray;
 
@@ -24,50 +24,46 @@ class DataController{
         console.log("************************************");
         console.log(keyAirArray);
 
-
-        
         let response = {
             resultCode : 10
         }
         return res.send(response);
     }
-    
-
 
     static trainNeuron(req, res){
         let email = req.body.email;
         console.log("informacion de nico"+req.body+"informacion de nico")
-        var data = (req.body); //acaa.items
+        var data = (req.body);
 
         User.findById(email)
-            .then(usr=>{
-                if(!usr){
-                    return res.send(email+" k NO EXISTE WACHO")
-                }
-                //FALTA DESPARSEAR
-                // let neurona = usr.neurona;
+          .then(usr=>{
+            if(!usr){
+                return res.send(email+" k NO EXISTE WACHO")
+            }
+            var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(usr.neurona));
+            usr.neurona= JSON.stringify(CustomNeurona.trainNeurona(usr, neuronaPosta, data))
+            usr.save()
+        });
 
-                var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(usr.neurona));
-               usr.neurona= JSON.stringify(CustomNeurona.trainNeurona(usr, neuronaPosta, data))
-                usr.save()
-          });
+        saveData()
     }
 
     static loginUsuarioValidado(req, res){
-        let email = req.body.email
-        console.log(email)
-
-        UserService.findUser(email)
-            .then(user =>{
-                if(!user){
-                    return res.send("No User")
-                }
-                var data = (req.body);
-                var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(user.neurona));
-                CustomNeurona.validatorUser(data,user,neuronaPosta)
-                return res.send(user)
-            })
+      let email = req.body.email
+      console.log(email)
+      UserService.findUser(email)
+        .then(user =>{
+            if(!user){
+              return res.send("No User")
+            }
+            var data = (req.body);
+            var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(user.neurona));
+            CustomNeurona.validatorUser(data, user, neuronaPosta)
+            return res.send(user)
+        })
     }
+
+    static
 }
 
 module.exports = DataController;
