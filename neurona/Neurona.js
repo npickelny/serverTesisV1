@@ -7,7 +7,6 @@ let Promise = require('bluebird');
 let _=require('lodash');
 let DataService = require('../service/DataService')
 
-
 class Neurona {
     constructor() {
     }
@@ -31,18 +30,28 @@ class Neurona {
         console.log(myNetwork)
         var trainer = new Trainer(myNetwork);
 
+        let normalizedData = [];
+        let dataDeOtro = [];
+
         Promise.try(function () {
-          return Neurona.normalizarData(data, user)
+          normalizedData = Neurona.normalizarData(data, 1)
+          return;
         })
-        .then(normalizedData => {
-            console.log(normalizedData)
-            DataService.saveData(user,normalizedData)
-            data = DataService.getDataFromAnotherPerson(user.email)
-            return Neurona.normalizarData(data)
+        .then(() => {
+          return DataService.getDataFromAnotherPerson(user.email)
         })
-       // .then(normalizedData, otraData)
-            
+        .then(dataAux => {
+          return Promise.each(dataAux, function(data){
+              dataDeOtro.push(Neurona.normalizarData(data, 0));
+              return;
+          });
+        })
+        .then(() => {
+            console.log(normalizedData);
+            console.log("***************");
+            console.log(dataDeOtro);
             trainer.train(normalizedData);
+            trainer.train(dataDeOtro);
             var output = myNetwork.activate([0.0215,
                     0.0215,
                     0.0215,
@@ -72,39 +81,27 @@ class Neurona {
                     0.0215]);
                 console.log(output+"asdasdasdas")
                 return myNetwork;
-            }
+            })
         //console.log(neurona.activate([0.47, 0.93, 0.70, 0.63]));
+    }
 
-
-    static normalizarData(dataEnJson, user) {
-
+    static normalizarData(dataEnJson, output) {
         var trainingSet = [];
-
         var data=JSON.parse(dataEnJson.trainingData)
         console.log(data)
         for (var i = 0; i < data.length; i++) {
-
-            var normalizada = []
+            var normalizada = [];
             for (var j = 0; j < data[i].length; j++){
                 if (data[i][j].timer != 0) {
                     normalizada.push((data[i][j].timer / data[i][j].cant) / 1000)
-
                 }
                 else {
-                    normalizada.push(0)
-
+                    normalizada.push(0);
                 }
-
             }
-
-            trainingSet.push({input: normalizada, output: [1]})
-
+            trainingSet.push({input: normalizada, output: [output]})
         }
-
-        return trainingSet
-        //input: [letter[0], letter[1]],
-        //output: [1]
-
+        return trainingSet;
     }
 
     static normalizarDataLogin(datosParaLogin) {
@@ -118,12 +115,9 @@ class Neurona {
             else {
                 normalizada.push(0)
             }
-
-
         }
-        return normalizada
+        return normalizada;
     }
-
 
     static validatorUser(data, user, myNetwork) {
         Promise.try(function () {
@@ -138,7 +132,6 @@ class Neurona {
 
     }
 }
-
 
 module.exports = Neurona;
 

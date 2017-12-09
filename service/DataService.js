@@ -9,7 +9,14 @@ class DataService {
   }
 
   static getDataFromAnotherPerson(email){
-            
+    return Letter.findAll({
+      where: {
+        [Op.not]: [
+          { email: email }
+        ]
+      },
+      limit: 10
+    })
   }
 
   static createData(email, data) {
