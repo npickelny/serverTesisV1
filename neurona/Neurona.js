@@ -5,7 +5,7 @@ var synaptic = require('synaptic'); // this line is not needed in the browser
 var letter= require('../models/letter')
 let Promise = require('bluebird');
 let _=require('lodash');
-
+let DataService = require('../service/DataService')
 
 class Neurona {
     constructor() {
@@ -31,13 +31,16 @@ class Neurona {
         var trainer = new Trainer(myNetwork);
 
         Promise.try(function () {
+          return Neurona.normalizarData(data)
+        })
+        .then(normalizedData => {
+            data = DataService.getDataFromAnotherPerson(user.email)
             return Neurona.normalizarData(data)
         })
-            .then(normalizedData => {
-                console.log(normalizedData)
-                trainer.train(normalizedData);
-
-                var output = myNetwork.activate([0.0215,
+        .then(normalizedData, otraData)
+            
+            trainer.train(normalizedData);
+            var output = myNetwork.activate([0.0215,
                     0.0215,
                     0.0215,
                     0.0215,
@@ -67,8 +70,6 @@ class Neurona {
                 console.log(output+"asdasdasdas")
                 return myNetwork;
             })
-
-
         //console.log(neurona.activate([0.47, 0.93, 0.70, 0.63]));
     }
 

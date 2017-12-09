@@ -28,8 +28,6 @@ class UserController {
 
 
   static signup(req, res) {
-
-
     console.log(req.body.lastName);
     // return res.send("dsadsa");
     let auxUser = {
@@ -38,7 +36,7 @@ class UserController {
       lastName: req.body.lastName
     }
     console.log("hola"+req.body.lastName)
-    
+
     UserService.findUser(auxUser.email)
       .then(user =>{
         if(user){
@@ -53,7 +51,7 @@ class UserController {
         console.log(err);
         return err;
       })
-    
+
   }
 
 

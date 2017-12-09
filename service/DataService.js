@@ -14,10 +14,25 @@ class DataService {
 
   static createData(email, data){
     return Letter.create({
-       name: user.name,
-       lastName: user.lastName,
-       email: user.email,
-       neurona: JSON.stringify(Neurona.createNeurona())
+      email: "nana@lala.com",
+      a: data[0],
+      b:{      },
+      c: {      },
+      d: {
+
+      },
+      e: {
+
+      },
+      f: {
+
+      },
+      g: {
+
+      },
+      h: {
+
+      },
     })
       .then(usr =>{
          console.log(usr);
