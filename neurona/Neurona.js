@@ -2,10 +2,11 @@
  * Created by nicolaspickelny on 6/11/17.
  */
 var synaptic = require('synaptic'); // this line is not needed in the browser
-var letter= require('../models/letter')
+let letter= require('../models/Letter')
 let Promise = require('bluebird');
 let _=require('lodash');
 let DataService = require('../service/DataService')
+
 
 class Neurona {
     constructor() {
@@ -31,13 +32,15 @@ class Neurona {
         var trainer = new Trainer(myNetwork);
 
         Promise.try(function () {
-          return Neurona.normalizarData(data)
+          return Neurona.normalizarData(data, user)
         })
         .then(normalizedData => {
+            console.log(normalizedData)
+            DataService.saveData(user,normalizedData)
             data = DataService.getDataFromAnotherPerson(user.email)
             return Neurona.normalizarData(data)
         })
-        .then(normalizedData, otraData)
+       // .then(normalizedData, otraData)
             
             trainer.train(normalizedData);
             var output = myNetwork.activate([0.0215,
@@ -69,25 +72,29 @@ class Neurona {
                     0.0215]);
                 console.log(output+"asdasdasdas")
                 return myNetwork;
-            })
+            }
         //console.log(neurona.activate([0.47, 0.93, 0.70, 0.63]));
-    }
 
-    static normalizarData(dataEnJson) {
+
+    static normalizarData(dataEnJson, user) {
 
         var trainingSet = [];
 
         var data=JSON.parse(dataEnJson.trainingData)
         console.log(data)
         for (var i = 0; i < data.length; i++) {
+
             var normalizada = []
             for (var j = 0; j < data[i].length; j++){
                 if (data[i][j].timer != 0) {
                     normalizada.push((data[i][j].timer / data[i][j].cant) / 1000)
+
                 }
                 else {
                     normalizada.push(0)
+
                 }
+
             }
 
             trainingSet.push({input: normalizada, output: [1]})

@@ -45,7 +45,7 @@ class DataController{
             usr.save()
         });
 
-        saveData()
+        //saveData()
     }
 
     static loginUsuarioValidado(req, res){
@@ -63,7 +63,7 @@ class DataController{
         })
     }
 
-    static
+
 }
 
 module.exports = DataController;
