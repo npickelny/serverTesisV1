@@ -4,14 +4,13 @@ class DataService {
   constructor(){}
 
   static saveData(email, data){
-    data = createData(email, data);
-    data.save();
+    DataService.createData(email, data);
   }
 
   static getDataFromAnotherPerson(email){
     return Letter.findAll({
       where: {
-        [Op.not]: [
+        "not": [
           { email: email }
         ]
       },
@@ -49,21 +48,11 @@ class DataService {
               w: data[i].input[22],
               x: data[i].input[23],
               y: data[i].input[24],
-              z: data[i].input[25]
-
-
+              z: data[i].input[25],
+              space:data[i].input[26]
           })
-              .then(usr => {
-                  console.log(usr);
-              })
-              .catch(err => {
-                  console.log(err);
-              })
       }
   }
-
-
-
 }
 
 module.exports = DataService;

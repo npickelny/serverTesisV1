@@ -7,115 +7,115 @@ let Sequelize = require('sequelize');
 let letters = Database.define('letters', {
     email: {
         type: Sequelize.STRING,
-        allowNull: false
+        // allowNull: false
     },
     a: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     b:{
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     c: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     d: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     e: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     f: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     g: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     h: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     i: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     j: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     k: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     l: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     m: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     n: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     o: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     p: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     q: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     r: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     s: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     t: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     u: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     v: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     w: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     x: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     y: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     z: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     },
     space: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        // allowNull: false
     }
 })
 

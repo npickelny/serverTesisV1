@@ -35,17 +35,25 @@ class DataController{
         console.log("informacion de nico"+req.body+"informacion de nico")
         var data = (req.body);
 
+        let user = {};
         User.findById(email)
-          .then(usr=>{
-            if(!usr){
-                return res.send(email+" k NO EXISTE WACHO")
-            }
-            var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(usr.neurona));
-            usr.neurona= JSON.stringify(CustomNeurona.trainNeurona(usr, neuronaPosta, data))
-            usr.save()
-        });
-
-        //saveData()
+          .then(usr=> {
+              if (!usr) {
+                  return res.send(email + " k NO EXISTE WACHO")
+              }
+              user = usr;
+              var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(usr.neurona));
+              console.log(neuronaPosta)
+              console.log("***************Neurona Posta********************");
+              var neuron = CustomNeurona.trainNeurona(usr, neuronaPosta, data);
+              return neuron
+          })
+            .then(neuron => {
+                console.log("***************Neurona********************");
+                console.log(neuron)
+                user.neurona= JSON.stringify(neuron)
+                user.save()
+            })
     }
 
     static loginUsuarioValidado(req, res){

@@ -19,6 +19,7 @@ class UserController {
     UserService.findUser(email)
     .then(user =>{
       if(!user){
+          res.status(400)
           return res.send("No User")
       }
         return res.send(user)
@@ -35,17 +36,17 @@ class UserController {
       name: req.body.name,
       lastName: req.body.lastName
     }
-    console.log("hola"+req.body.lastName)
+    console.log('hola'+req.body.lastName)
 
     UserService.findUser(auxUser.email)
       .then(user =>{
         if(user){
-          return res.send("User exist");
+            res.status(400)
+            return res.send({body: 'User exist'});
         }
         else{
         UserService.createUser(auxUser);
-
-        return res.send("User Created");
+        return res.send({body: 'User Created'});
       }})
       .catch(err =>{
         console.log(err);
