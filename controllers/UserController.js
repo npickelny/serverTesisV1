@@ -36,17 +36,19 @@ class UserController {
       name: req.body.name,
       lastName: req.body.lastName
     }
-    console.log('hola'+req.body.lastName)
+
 
     UserService.findUser(auxUser.email)
       .then(user =>{
         if(user){
-            res.status(400)
-            return res.send({body: 'User exist'});
+            console.log('Log: '+user.email+ " exist" )
+            res.status(201)
+            return res.send({msg: 'User exist'});
         }
         else{
         UserService.createUser(auxUser);
-        return res.send({body: 'User Created'});
+        console.log("Log: "+auxUser.email+" was created")
+        return res.send({msg: 'User Created'});
       }})
       .catch(err =>{
         console.log(err);

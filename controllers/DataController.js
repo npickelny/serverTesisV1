@@ -32,27 +32,28 @@ class DataController{
 
     static trainNeuron(req, res){
         let email = req.body.email;
-        console.log("informacion de nico"+req.body+"informacion de nico")
+        console.log("informacion: "+req.body)
         var data = (req.body);
 
         let user = {};
         User.findById(email)
           .then(usr=> {
               if (!usr) {
-                  return res.send(email + " k NO EXISTE WACHO")
+
+                  return res.send({msg: '99'})
               }
               user = usr;
               var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(usr.neurona));
-              console.log(neuronaPosta)
-              console.log("***************Neurona Posta********************");
+
               var neuron = CustomNeurona.trainNeurona(usr, neuronaPosta, data);
               return neuron
           })
             .then(neuron => {
-                console.log("***************Neurona********************");
-                console.log(neuron)
+
                 user.neurona= JSON.stringify(neuron)
                 user.save()
+
+                res.send({msg:"105"})
             })
     }
 
@@ -60,14 +61,24 @@ class DataController{
       let email = req.body.email
       console.log(email)
       UserService.findUser(email)
-        .then(user =>{
-            if(!user){
-              return res.send("No User")
+        .then(user => {
+            if (!user) {
+                return res.send("No User")
             }
             var data = (req.body);
             var neuronaPosta = new synaptic.Network.fromJSON(JSON.parse(user.neurona));
-            CustomNeurona.validatorUser(data, user, neuronaPosta)
-            return res.send(user)
+            return CustomNeurona.validatorUser(data, user, neuronaPosta)
+        })
+          .then(resultado =>{
+            if(resultado[0].toPrecision(10)>0.59)
+            {
+                console.log("Usuario habilitado para acceder")
+                res.send({msg: "10"})
+            }
+            else{
+                console.log("Usuario no habilitado para acceder")
+                res.send({msg:"32"})
+            }
         })
     }
 

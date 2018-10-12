@@ -27,7 +27,7 @@ class Neurona {
 
         //var myNetwork = new Architect.Perceptron(27, 10, 1);
 
-        console.log(myNetwork)
+
         var trainer = new Trainer(myNetwork);
 
         let normalizedData = [];
@@ -48,9 +48,7 @@ class Neurona {
           });
         })
         .then(() => {
-            console.log(normalizedData);
-            console.log("***************");
-            console.log(dataDeOtro);
+
             trainer.train(normalizedData);
         })
         .then(() => {
@@ -129,7 +127,7 @@ class Neurona {
     static normalizarData(dataEnJson, output) {
         var trainingSet = [];
         var data=JSON.parse(dataEnJson.trainingData)
-        console.log(data)
+
         for (var i = 0; i < data.length; i++) {
             var normalizada = [];
             for (var j = 0; j < data[i].length; j++){
@@ -163,14 +161,16 @@ class Neurona {
     }
 
     static validatorUser(data, user, myNetwork) {
-        Promise.try(function () {
+        return Promise.try(function () {
             return Neurona.normalizarDataLogin(data)
         })
             .then(normalizedData => {
-                console.log(normalizedData + "kmdlskfdsmdlksf")
                 var output = myNetwork.activate(normalizedData)
-                console.log(output + "pruebaaa")
+                console.log(output)
+                return output
             })
+
+
 
 
     }
